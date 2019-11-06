@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.Category;
+import org.launchcode.models.Cheese;
+
 import javax.validation.Valid;
 
 @Controller
@@ -29,10 +31,21 @@ public class CategoryController {
     }
 
 
+    public String processAddCheeseForm(
+            @ModelAttribute  @Valid Cheese newCheese,
+            Errors errors,
+            @RequestParam int categoryId,
+            Model model) {
+        Category cat = categoryDao.findOne(categoryId);
+        newCheese.setCategory(cat);
+        return "category/index";
+    }
+
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCategoryForm(Model model) {
         model.addAttribute("title", "Add Category");
         model.addAttribute(new Category());
+//        Can't get the .values() method to work. This should be why it isn't displaying in category/add
 //        model.addAttribute("categories", Category.values());
         return "category/add";
     }
