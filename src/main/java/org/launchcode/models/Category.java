@@ -12,11 +12,6 @@ import java.util.*;
 @Entity
 public class Category {
 
-
-    @OneToMany
-    @JoinColumn(name = "category_id")
-    private List<Cheese> cheeses = new ArrayList<>();
-
     @Id
     @GeneratedValue
     private int id;
@@ -25,9 +20,11 @@ public class Category {
     @Size(min = 3, max = 15)
     private String name;
 
+    @OneToMany
+    @JoinColumn(name = "category_id")
+    private List<Cheese> cheeses = new ArrayList<>();
 
-    public Category() {
-    }
+    public Category() {}
 
     public Category(String name) {
         this.name = name;
@@ -37,12 +34,14 @@ public class Category {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+    public List<Cheese> getCheeses() { return cheeses; }
 
 }

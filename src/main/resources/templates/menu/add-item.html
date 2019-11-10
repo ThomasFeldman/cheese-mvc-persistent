@@ -10,8 +10,9 @@
 
             <div class="form-group">
                 <label th:for="cheeseId">Cheese</label>
-                <input class="form-control" th:field="*{description}" />
-                <span th:errors="*{description}" class="error"></span>
+<!--                These two lines were the problem find out how to fix them and include them?-->
+<!--                <input class="form-control" th:field="*{description}" />-->
+<!--                <span th:errors="*{description}" class="error"></span>-->
                 <select name="cheeseId">
                     <option th:each="cheese : *{cheeses}"
                             th:text="${cheese.name}"
